@@ -48,10 +48,10 @@
         <ul class="buslist">
             <?php foreach ($documents as $document): ?>
                 <li>
-                    <span>ID: <?php echo $document["id"]; ?></span>
-                    <span>Plat: <?php echo $document["plat"]; ?></span>
-                    <span>Jenis: <?php echo $document["jenis"]; ?></span>
-                    <span>Kursi: <?php echo $document["kursi"]; ?></span>
+                    <span>ID: <?php echo $document["id"]; ?></span><br>
+                    <span>Plat: <?php echo $document["plat"]; ?></span><br>
+                    <span>Jenis: <?php echo $document["type"]; ?></span><br>
+                    <span>Kursi: <?php echo $document["chair"]; ?></span><br>
                     <form action="../php/belitiket.php" method="POST">
                         <input type="hidden" name="id" value="<?php echo $document['id']; ?>">
                         <button type="submit">Beli</button>

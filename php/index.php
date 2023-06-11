@@ -44,11 +44,11 @@
         <ul class="buslist">
             <?php foreach ($documents as $document): ?>
                 <li>
-                    <span>ID: <?php echo $document["id"]; ?></span>
-                    <span>Plat: <?php echo $document["plat"]; ?></span>
-                    <span>Jenis: <?php echo $document["jenis"]; ?></span>
-                    <span>Kursi: <?php echo $document["kursi"]; ?></span>
-                    <form action="../php/login.php">
+                    <span>ID: <?php echo $document["id"]; ?></span><br>
+                    <span>Plat: <?php echo $document["plat"]; ?></span><br>
+                    <span>Jenis: <?php echo $document["type"]; ?></span><br>
+                    <span>Kursi: <?php echo $document["chair"]; ?></span><br>
+                    <form action="../html/login.html">
                         <button type="submit">Beli</button>
                     </form>
                 </li>

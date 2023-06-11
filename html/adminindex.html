@@ -1,9 +1,3 @@
-<?php
-    include "../php/connect.php";
-    $collection = $database->selectCollection("bus");
-    $documents = $collection->find();
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,25 +27,10 @@
                 <ul>
                     <li><a href="#">Beranda</a></li>
                     <li><a href="../php/listbus.php">Bus</a></li>
-                    <li><a href="../php/supir.php">Supir</a></li>
+                    <li><a href="../php/listsupir.php">Supir</a></li>
                 </ul>
             </nav>
         </div>
-    </div>
-    <div class="busnya">
-        <ul class="buslist">
-            <?php foreach ($documents as $document): ?>
-                <li>
-                    <span>ID: <?php echo $document["id"]; ?></span>
-                    <span>Plat: <?php echo $document["plat"]; ?></span>
-                    <span>Jenis: <?php echo $document["jenis"]; ?></span>
-                    <span>Kursi: <?php echo $document["kursi"]; ?></span>
-                    <form action="../php/login.php">
-                        <button type="submit">Beli</button>
-                    </form>
-                </li>
-            <?php endforeach; ?>
-        </ul>
     </div>
     <script src="../javascript/button.js"></script>
 </body>
