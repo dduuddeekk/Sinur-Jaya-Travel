@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style/bus.css" />
+    <title>TAMBAH BUS</title>
+</head>
+<body>
+    <h1>TAMBAH BUS</h1>
+    <form action="../php/addbus.php" method="POST">
+        <label for="photo">Foto:</label>
+        <input type="file" name="image" />
+        <label for="name">Nomor STNK:</label>
+        <input type="text" name="plat">
+        <label for="address">Jenis:</label>
+        <input type="text" name="type">
+        <label for="number">Jumlah Kursi:</label>
+        <input type="number" name="chair">
+        <div class="button-container">
+            <button type="submit">SIMPAN</button>
+            <a href="javascript:history.back()" class="button-cancel">BATAL</a>
+        </div>
+    </form>
+</body>
+</html>

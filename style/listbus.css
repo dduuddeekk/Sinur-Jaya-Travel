@@ -1,0 +1,60 @@
+body {
+    background-color: aliceblue;
+    font-family: "Roboto", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    color: #fcd773;
+    text-align: center;
+}
+
+.kembali-button {
+    background-color: #fcd773;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.kembali-button:hover {
+    background-color: #f9c611;
+}
+
+.tambah {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.bus-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.bus-list li {
+    background-color: #fcd773;
+    padding: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.bus-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+form {
+    margin: 0;
+}
+
+.empty-message {
+    text-align: center;
+    color: #fcd773;
+    margin-top: 20px;
+}

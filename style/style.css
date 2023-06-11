@@ -1,0 +1,144 @@
+*, html, body {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #fff;
+    position: relative;
+}
+
+.headings {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    padding: 5px;
+    background-color: #fcd733;
+    text-transform: capitalize;
+    font-size: 40px;
+}
+
+.brand {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    margin-left: 20px;
+}
+
+.brand-text {
+    color: aliceblue;
+    font-family: "Lobster";
+}
+
+.menu {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.menu i {
+    font-size: 20px;
+    color: aliceblue;
+}
+
+.rightmenu {
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background: #222;
+    overflow-y: auto;
+    transition: .5s;
+    transform: translateX(100%);
+    height: 100vh;
+}
+
+.rightmenu.show {
+    transform: translateX(0);
+}
+
+.navigations {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 20px;
+    text-transform: uppercase;
+    height: 100%;
+}
+
+.navigations ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.navigations li {
+    margin-bottom: 15px;
+}
+
+.button {
+    font-family: "Roboto", sans-serif;
+}
+
+.rightmenu a {
+    padding: 8px 10px;
+    text-decoration: none;
+    font-size: 15px;
+    color: #fff;
+    display: block;
+    transition: .4s;
+    font-family: "Roboto", sans-serif;
+}
+
+.rightmenu a:hover {
+    color: #fcd733;
+    background: aliceblue;
+}
+
+.headings .menu {
+    margin-left: auto; /* Memisahkan elemen menu ke pojok kanan */
+    margin-right: 20px; /* Memberikan ruang di antara brand dan menu */
+}
+
+.bus-image {
+    position: relative;
+    z-index: -1;
+    width: 100%;
+}
+
+.welcome-text {
+    position: absolute;
+    top: 70px; /* Menempatkan tulisan di bawah headings */
+    /* left: 500px; */
+    right: 0;
+    text-align: left;
+    padding: 20px;
+    background-image: url("../image/bus.jpg"); /* Menggunakan gambar sebagai background */
+    background-size: cover; /* Menyesuaikan ukuran gambar dengan area */
+    background-position: center; /* Menempatkan gambar di tengah-tengah area */
+    font-family: "Roboto", sans-serif;
+}
+
+.welcome-text h1 {
+    font-size: 40px;
+    color: aliceblue;
+    text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
+    margin-top: 200px;
+    margin-bottom: 20px;
+}
+
+.welcome-text p {
+    color: aliceblue;
+    text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
+    font-size: 25px;
+    margin-bottom: 200px;
+    margin-right: 600px;
+}

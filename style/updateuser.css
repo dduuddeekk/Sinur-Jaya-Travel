@@ -1,0 +1,66 @@
+/* updateuser.css */
+
+body {
+    background-color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: "Roboto", sans-serif;
+}
+
+h1 {
+    color: #fcd733;
+    text-align: center;
+    margin-top: -50px;
+    margin-bottom: 20px;
+}
+
+form {
+    width: 300px;
+    border: 2px solid #fcd733;
+    /* Tambahkan border pada form */
+    padding: 20px;
+    /* Berikan ruang padding agar border terlihat jelas */
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #fcd733;
+}
+
+input[type="file"],
+input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: white;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+button[type="submit"],
+.button-cancel {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button[type="submit"] {
+    background-color: #fcd733;
+    color: white;
+}
+
+.button-cancel {
+    background-color: transparent;
+    color: #fcd733;
+}
