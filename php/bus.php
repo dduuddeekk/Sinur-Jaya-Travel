@@ -78,10 +78,11 @@
                     <li>
                         <img class="bus-image" src="<?php echo $document['image']; ?>" alt="Bus Image">
                         <span>ID: <?php echo $document["id"]; ?></span><br>
+                        <?php $busid = $document["id"]; ?>
                         <span>Plat: <?php echo $document["plat"]; ?></span><br>
                         <span>Jenis: <?php echo $document["type"]; ?></span><br>
                         <span>Kursi: <?php echo $document["chair"]; ?></span><br>
-                        <form action="../php/buytiket.php">
+                        <form action="../php/formtiket.php?busid=<?php echo $busid; ?>" method="POST">
                             <button type="submit">Beli</button>
                         </form>
                     </li>
