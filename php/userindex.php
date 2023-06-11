@@ -65,11 +65,12 @@
                 <ul>
                     <li><a id="userMain" href="../php/userindex.php">beranda</a></li>
                     <li><a id="userLink" href="../php/user.php">akun</a></li>
+                    <li><a id="userBus" href="../php/bus.php">bus</a></li>
                     
                     <script src="../javascript/mainer.js"></script>
                     <script src="../javascript/linker.js"></script>
+                    <script src="../javascript/buser.js"></script>
 
-                    <li><a href="../php/seebus.php">bus</a></li>
                     <li><a href="rute.html">rute</a></li>
                     <li><a href="#">tiket</a></li>
                 </ul>
