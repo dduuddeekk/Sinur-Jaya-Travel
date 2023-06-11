@@ -35,7 +35,7 @@
             align-items: center;
             margin: 10px;
             padding: 10px;
-            background-color: #fcd773;
+            background-color: #fcd733;
             color: aliceblue;
         }
 
@@ -71,8 +71,10 @@
                     <script src="../javascript/linker.js"></script>
                     <script src="../javascript/buser.js"></script>
 
-                    <li><a href="rute.html">rute</a></li>
-                    <li><a href="#">tiket</a></li>
+                    <li><a href="#">rute</a></li>
+
+                    <li><a id="userTikets" href="../php/tiket.php">tiket</a></li>
+                    <script src="../javascript/tiketers.js"></script>
                 </ul>
             </nav>
         </div>

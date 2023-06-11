@@ -1,3 +1,16 @@
+<?php
+include "../php/connect.php";
+$collection = $database->selectCollection("users");
+
+$id = $_GET["id"];
+$document = $collection->findOne(["id" => $id]);
+
+if (!$document) {
+    echo "Dokumen tidak ditemukan.";
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,13 +61,12 @@
             outline: none;
         }
     </style>
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
 </head>
 <body>
     <h1>PEMBELIAN BERHASIL</h1>
     <div>
         <img src="../image/benar.jpg" alt="Success Image">
     </div>
-    <a href="#" class="button">Kembali</a>
+    <a href="../php/userindex.php?username=<?php echo urlencode($document["username"]); ?>" class="button">Kembali</a>
 </body>
 </html>

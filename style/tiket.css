@@ -1,0 +1,45 @@
+.tiketnya{
+    background-color: aliceblue; 
+}
+
+.tiketlist {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.tiketlist li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+    padding: 10px;
+    background-color: #fcd733;
+    color: aliceblue;
+}
+
+.tiketlist li .tiket-image {
+    width: 200px;
+    height: 150px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.sort-buttons {
+    margin-bottom: 20px;
+}
+
+.sort-buttons a.button {
+    margin-right: 10px;
+    background-color: #fcd733;
+    color: aliceblue;
+}
+
+.sort-buttons a.button:hover {
+    background-color: aliceblue;
+    color: #fcd733;
+}
