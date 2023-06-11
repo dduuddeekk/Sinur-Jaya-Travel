@@ -1,28 +1,33 @@
 <?php
-    include "../php/connect.php";
+include "../php/connect.php";
 
-    $collection = $database->selectCollection("supir");
+$collection = $database->selectCollection("supir");
 
-    $documents = $collection->find();
+$isEmpty = $collection->countDocuments() === 0;
 
-    $isEmpty = $collection->estimatedDocumentCount() === 0;
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $idToDelete = $_POST["delete"];
+    $collection->deleteOne(["id" => $idToDelete]);
+    header("Location: ../php/listsupir.php");
+    exit();
+}
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $idToDelete = $_POST["delete"];
-        $collection->deleteOne(["id" => $idToDelete]);
-        header("Location: ../php/listsupir.php");
-        exit();
-    }
+// Sorting logic
+$sortKey = isset($_GET["sort"]) ? $_GET["sort"] : "";
+$sortOptions = [];
 
-    // Sorting logic
-    if (isset($_GET["sort"])) {
-        $sortKey = $_GET["sort"];
-        if ($sortKey === "name") {
-            $documents->sort(["name" => 1]);
-        } elseif ($sortKey === "age") {
-            $documents->sort(["age" => 1]);
-        }
-    }
+if ($sortKey === "name") {
+    $sortOptions = ["name" => 1];
+} elseif ($sortKey === "age") {
+    $sortOptions = ["age" => 1];
+}
+
+$queryOptions = [];
+if (!empty($sortOptions)) {
+    $queryOptions['sort'] = $sortOptions;
+}
+
+$documents = $collection->find([], $queryOptions);
 ?>
 <!DOCTYPE html>
 <html lang="en">

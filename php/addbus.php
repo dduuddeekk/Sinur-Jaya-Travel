@@ -13,6 +13,7 @@
     }
 
     $id = generateBusId();
+    $image = $_FILES["image"];
     $plat = isset($_POST["plat"]) ? $_POST["plat"] : '';
     $type = isset($_POST["type"]) ? $_POST["type"] : '';
     $chair = isset($_POST["chair"]) ? intval($_POST["chair"]) : 0;

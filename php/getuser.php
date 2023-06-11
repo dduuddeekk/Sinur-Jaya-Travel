@@ -23,7 +23,7 @@
         <input type="hidden" name="username" value="<?php echo $username; ?>">
         <input type="hidden" name="email" value="<?php echo $email; ?>">
         <input type="hidden" name="password" value="<?php echo $password; ?>">
-        <label for="photo">Foto:</label>
+        <label for="image">Foto:</label>
         <input type="file" name="image" />
         <label for="name">Nama:</label>
         <input type="text" name="name">

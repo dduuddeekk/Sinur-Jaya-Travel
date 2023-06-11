@@ -5,7 +5,7 @@
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $id = $_POST["id"];
-        $image = $_FILES["image"];
+        $image = isset($_FILES["image"]) ? $_FILES["image"] : null;
         $plat = isset($_POST["plat"]) ? $_POST["plat"] : "";
         $jenis = isset($_POST["type"]) ? $_POST["type"] : ""; // Fix: Change "jenis" to "type"
         $kursi = isset($_POST["chair"]) ? intval($_POST["chair"]) : 0; // Fix: Change "kursi" to "chair"
@@ -19,7 +19,7 @@
             "status" => $status
         ]];
 
-        if ($image["error"] === UPLOAD_ERR_OK) {
+        if ($image !== null && $image["error"] === UPLOAD_ERR_OK) {
             $tempFilePath = $image["tmp_name"];
             $extension = pathinfo($image["name"], PATHINFO_EXTENSION);
             $destinationPath = '../image/busprofile/' . $id . '.' . $extension;

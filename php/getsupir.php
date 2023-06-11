@@ -1,9 +1,9 @@
 <?php
-    include "../php/connect.php";
+include "../php/connect.php";
 
-    $collection = $database->selectCollection("supir");
+$collection = $database->selectCollection("supir");
 
-    $id = isset($_POST["id"]) ? $_POST["id"] : "";
+$id = isset($_POST["id"]) ? $_POST["id"] : "";
 ?>
 <!DOCTYPE html>
 <html>
@@ -16,9 +16,9 @@
 </head>
 <body>
     <h1>PERBARUI BUS</h1>
-    <form action="../php/updatesupir.php" method="POST">
-        <input type="hidden" name="id" value="<?php echo $id; ?>">
-        <label for="photo">Foto:</label>
+    <form action="../php/updatesupir.php" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="<?= htmlspecialchars($id) ?>">
+        <label for="image">Foto:</label>
         <input type="file" name="image" />
         <label for="name">Nama:</label>
         <input type="text" name="name">
