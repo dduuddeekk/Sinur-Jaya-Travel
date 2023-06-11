@@ -56,6 +56,9 @@
                     <input type="hidden" name="password" value="<?php echo escape($document["password"]); ?>">
                     <button type="submit">Perbarui</button>
                 </form>
+                <form action="../php/index.php">
+                    <button type="submit">Keluar</button>
+                </form>
             </li>
         </ul>
     <?php else: ?>
