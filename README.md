@@ -39,3 +39,14 @@ Dalam MongoDB kita tidak perlu membuat basis data dengan cara *create* atau sema
 ## UPDATE
 
 ## DELETE
+
+## SPECIAL THANKS
+
+Saya, I Kadek Indra Agusta Pratama, dari repository ini mengucapkan terima kasih yang sebesar-besarnya atas bantuan dan inspirasinya kepada:
+
+1. Teman kelompok saya karena telah mau berdiskusi bersama saya, Dewa dan Pram.
+2. Satya yang sudah menginspirasi saya menggunakan ```include```.
+3. W3School karena memberikan beberapa sintaks.
+4. ChatGPT karena melakukan *trace* program agar tidak error.
+5. MongoDB, kalau bukan dia terus pakai apa?
+6. Xampp karena menyediakan Apache server walau sering error.
