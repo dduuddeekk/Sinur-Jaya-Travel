@@ -16,8 +16,8 @@
 </head>
 <body>
     <h1>PERBARUI BUS</h1>
-    <form action="../php/updatebus.php" method="POST">
-        <input type="hidden" name="id" value="<?php echo $id; ?>">
+    <form action="../php/updatebus.php" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="<?= htmlspecialchars($id) ?>">
         <label for="image">Foto:</label>
         <input type="file" name="image" />
         <label for="plat">Nomor STNK:</label>

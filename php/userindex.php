@@ -14,6 +14,38 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>BERANDA</title>
+    <style>
+        .busnya{
+            background-color: aliceblue; 
+        }
+        
+        .buslist {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            align-items: flex-start;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .buslist li {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 10px;
+            padding: 10px;
+            background-color: #fcd773;
+            color: aliceblue;
+        }
+
+        .buslist li .bus-image {
+            width: 200px;
+            height: 150px;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -48,12 +80,12 @@
         <ul class="buslist">
             <?php foreach ($documents as $document): ?>
                 <li>
+                    <img class="bus-image" src="<?php echo $document['image']; ?>" alt="Bus Image">
                     <span>ID: <?php echo $document["id"]; ?></span><br>
                     <span>Plat: <?php echo $document["plat"]; ?></span><br>
                     <span>Jenis: <?php echo $document["type"]; ?></span><br>
                     <span>Kursi: <?php echo $document["chair"]; ?></span><br>
-                    <form action="../php/belitiket.php" method="POST">
-                        <input type="hidden" name="id" value="<?php echo $document['id']; ?>">
+                    <form action="../html/login.html">
                         <button type="submit">Beli</button>
                     </form>
                 </li>
