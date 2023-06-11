@@ -116,7 +116,7 @@
     $document = $collection->insertOne($query);
 
     if($document){
-        header("Location: ../html/tiketsuccess.html");
+        header("Location: ../php/tiketsuccess.php?id=$userid");
         exit();
     }else{
         echo "Something went wrong.";
