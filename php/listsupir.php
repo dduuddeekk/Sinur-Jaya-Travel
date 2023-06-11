@@ -3,7 +3,7 @@
 
     $collection = $database->selectCollection("supir");
 
-    $document = $collection->find();
+    $documents = $collection->find();
 
     $isEmpty = $documents->count() === 0;
 
@@ -13,6 +13,16 @@
         header("Location: ../php/listsupir.php");
         exit();
     }
+
+    // Sorting logic
+    if (isset($_GET["sort"])) {
+        $sortKey = $_GET["sort"];
+        if ($sortKey === "name") {
+            $documents->sort(["name" => 1]);
+        } elseif ($sortKey === "age") {
+            $documents->sort(["age" => 1]);
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,6 +31,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../style/listbus.css">
     <title>DAFTAR SUPIR</title>
+    <style>
+        .sort-button-container {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .sort-button {
+            background-color: #fcd773;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .sort-button:hover {
+            background-color: #f9c611;
+        }
+    </style>
 </head>
 <body>
     <h1>DAFTAR SUPIR</h1>
@@ -30,6 +59,11 @@
     <form action="../html/addsupir.html" class="tambah">
         <button type="submit">TAMBAH</button>
     </form>
+    <div class="sort-button-container">
+        <span>Urutkan berdasarkan:</span>
+        <a href="?sort=name" class="sort-button">Nama</a>
+        <a href="?sort=age" class="sort-button">Umur</a>
+    </div>
     <?php if ($isEmpty): ?>
         <p class="empty-message">Belum Ada Supir Yang Terdaftar</p>
     <?php else: ?>
@@ -41,6 +75,7 @@
                     <?php endif; ?>
                     <span>ID: <?php echo $document["id"]; ?></span>
                     <span>Nama: <?php echo $document["name"]; ?></span>
+                    <span>Umur: <?php echo $document["age"]; ?></span>
                     <span>Alamat: <?php echo $document["address"]; ?></span>
                     <span>Email: <?php echo $document["email"]; ?></span>
                     <span>Telepon: <?php echo $document["number"]; ?></span>

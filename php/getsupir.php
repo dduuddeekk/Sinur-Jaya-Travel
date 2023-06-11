@@ -1,7 +1,7 @@
 <?php
     include "../php/connect.php";
 
-    $collection = $database->selectCollection("bus");
+    $collection = $database->selectCollection("supir");
 
     $id = isset($_POST["id"]) ? $_POST["id"] : "";
 ?>
@@ -16,20 +16,20 @@
 </head>
 <body>
     <h1>PERBARUI BUS</h1>
-    <form action="../php/updatebus.php" method="POST">
+    <form action="../php/updatesupir.php" method="POST">
         <input type="hidden" name="id" value="<?php echo $id; ?>">
         <label for="photo">Foto:</label>
         <input type="file" name="image" />
-        <label for="plat">Nomor STNK:</label>
-        <input type="text" name="plat">
-        <label for="type">Jenis:</label>
-        <select name="type">
-            <option value="BIG">BIG</option>
-            <option value="MEDIUM">MEDIUM</option>
-            <option value="MICRO">MICRO</option>
-        </select>
-        <label for="chair">Kursi:</label>
-        <input type="number" name="chair">
+        <label for="name">Nama:</label>
+        <input type="text" name="name">
+        <label for="age">Umur:</label>
+        <input type="number" name="age">
+        <label for="address">Alamat:</label>
+        <input type="text" name="address">
+        <label for="email">Email:</label>
+        <input type="text" name="email">
+        <label for="number">Telepon:</label>
+        <input type="text" name="number">
         <label for="status">Status:</label>
         <select name="status">
             <option value="active">active</option>
