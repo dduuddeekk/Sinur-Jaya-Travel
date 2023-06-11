@@ -3,7 +3,7 @@
 
     $collection = $database->selectCollection("bus");
     $documents = $collection->find();
-    $isEmpty = $documents->count() === 0;
+    $isEmpty = $collection->estimatedDocumentCount() === 0;
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $idToDelete = $_POST["delete"];
