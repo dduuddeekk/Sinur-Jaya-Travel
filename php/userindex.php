@@ -63,7 +63,7 @@
         </div>
         <div class="welcome-text">
             <h1>Selamat Datang!</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum eius quas exercitationem esse quaerat, vel ea voluptas rem maxime error inventore voluptates eos pariatur cum provident saepe dolore totam unde.</p>
+            <p>Platform pembelian tiket bus terpercaya, ya, Sinur Jaya Travel. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatem eveniet asperiores impedit beatae deleniti minima doloribus culpa, voluptas reprehenderit obcaecati ex aliquam cumque, voluptates exercitationem alias laboriosam corrupti delectus autem.</p>
         </div>
         <div class="rightmenu" id="rightMenu">
             <a href="#" class="button" onclick="closeBtn()">x</a>
