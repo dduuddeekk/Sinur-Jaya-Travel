@@ -37,9 +37,9 @@
         $extension = pathinfo($image["name"], PATHINFO_EXTENSION);
         $destinationPath = '../image/driverprofile/' . $id . '.' . $extension;
         move_uploaded_file($tempFilePath, $destinationPath);
-        $query['image'] = $destinationPath;
+        $query["image"] = $destinationPath;
     }
-
+    
     try {
         $document = $collection->insertOne($query);
 

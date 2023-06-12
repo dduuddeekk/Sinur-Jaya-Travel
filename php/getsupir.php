@@ -12,10 +12,10 @@ $id = isset($_POST["id"]) ? $_POST["id"] : "";
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../style/updatebus.css">
-    <title>PERBARUI BUS</title>
+    <title>PERBARUI SUPIR</title>
 </head>
 <body>
-    <h1>PERBARUI BUS</h1>
+    <h1>PERBARUI SUPIR</h1>
     <form action="../php/updatesupir.php" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="id" value="<?= htmlspecialchars($id) ?>">
         <label for="image">Foto:</label>
