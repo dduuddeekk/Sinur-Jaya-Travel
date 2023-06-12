@@ -4,8 +4,6 @@
     include "../php/connect.php";
     $collection = $database->selectCollection("tiket");
     $documents = $collection->find();
-    $tujuan = "Indonesia";
-    $mapsUrl = "https://maps.google.com/maps?q=" . urlencode($tujuan) . "&t=&z=13&ie=UTF8&iwloc=&output=embed";
 ?>
 
 <!DOCTYPE html>
@@ -58,12 +56,16 @@
         </div>
         <div class="rutenya">
             <h2>RUTE BUS SINUR JAYA</h2>
-            <iframe src="<?php echo $mapsUrl; ?>" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
             <ul class="rutelist">
                 <?php foreach ($documents as $document): ?>
                     <li>
                         <span>Tujuan: <?php echo $document["destination"]; ?></span><br>
                         <span>Tanggal Keberangkatan: <?php echo $document["date"]; ?></span><br>
+                        <?php
+                            $tujuan = $document["destination"];
+                            $mapsUrl = "https://maps.google.com/maps?q=" . urlencode($tujuan) . "&t=&z=13&ie=UTF8&iwloc=&output=embed";
+                        ?>
+                        <iframe src="<?php echo $mapsUrl; ?>" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
                     </li>
                 <?php endforeach; ?>
             </ul>
