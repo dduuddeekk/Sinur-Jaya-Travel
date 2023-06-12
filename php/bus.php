@@ -1,5 +1,12 @@
 <?php
     include "../php/connect.php";
+
+    $username = $_GET["username"];
+
+    $userCollection = $database->selectCollection("users");
+    $userDocument = $userCollection->findOne(["username" => $username]);
+    $userid = $userDocument["id"];
+
     $collection = $database->selectCollection("bus");
     $documents = $collection->find();
 ?>
@@ -67,7 +74,7 @@
                     <script src="../javascript/linker.js"></script>
                     <script src="../javascript/buser.js"></script>
 
-                    <li><a href="rute.html">rute</a></li>
+                    <li><a href="../php/rute.php">rute</a></li>
                     <li><a href="#">tiket</a></li>
                 </ul>
             </nav>
@@ -82,7 +89,7 @@
                         <span>Plat: <?php echo $document["plat"]; ?></span><br>
                         <span>Jenis: <?php echo $document["type"]; ?></span><br>
                         <span>Kursi: <?php echo $document["chair"]; ?></span><br>
-                        <form action="../php/formtiket.php?busid=<?php echo $busid; ?>" method="POST">
+                        <form action="../php/formtiket.php?busid=<?php echo $busid; ?>&userid=<?php echo $userid; ?>" method="POST">
                             <button type="submit">Beli</button>
                         </form>
                     </li>

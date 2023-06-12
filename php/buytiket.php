@@ -102,11 +102,40 @@
         $price *= 4;
     }
 
+    $supirId = null;
+    $supirNama = null;
+    $supirEmail = null;
+    $supirNumber = null;
+
+    $supirCollection = $database->selectCollection("supir");
+
+    $pipeline = [
+        ['$sample' => ['size' => 1]]
+    ];
+
+    $options = [];
+
+    $cursor = $supirCollection->aggregate($pipeline, $options);
+    $randomSupirDocument = $cursor->toArray();
+
+    if (!empty($randomSupirDocument)) {
+        $supirId = $randomSupirDocument[0]->id;
+        $supirNama = $randomSupirDocument[0]->name;
+        $supirEmail = $randomSupirDocument[0]->email;
+        $supirNumber = $randomSupirDocument[0]->number;
+    } else {
+        echo "Tidak ada supir yang aktif.";
+    }
+
     $id = generateTiketId();
 
     $query = [
         "id" => $id,
         "busid" => $busid,
+        "supirid" => $supirId,
+        "supirname" => $supirNama,
+        "supiremail" => $supirEmail,
+        "supirnumber" => $supirNumber,
         "userid" => $userid,
         "destination" => $destination,
         "date" => $date,

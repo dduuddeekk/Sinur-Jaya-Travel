@@ -52,7 +52,7 @@
                     <script src="../javascript/linker.js"></script>
                     <script src="../javascript/buser.js"></script>
 
-                    <li><a href="#">rute</a></li>
+                    <li><a href="../php/rute.php">rute</a></li>
 
                     <li><a id="userTikets" href="../php/tiket.php">tiket</a></li>
                     <script src="../javascript/tiketers.js"></script>
@@ -66,6 +66,8 @@
                         <img class="tiket-image" src="../image/tiket.png" alt="tiket bang"/>
                         <span>ID: <?php echo $document["id"]; ?></span><br>
                         <span>ID Bus: <?php echo $document["busid"]; ?></span><br>
+                        <span>Nama Supir: <?php echo $document["supirname"]; ?></span><br>
+                        <span>Kontak Supir: <?php echo $document["supiremail"] . ", " . $document["supirnumber"]; ?></span><br>
                         <span>Tujuan: <?php echo $document["destination"]; ?></span><br>
                         <span>Tanggal Keberangkatan: <?php echo $document["date"]; ?></span><br>
                         <span>Total Harga: <?php echo $document["price"]; ?></span>

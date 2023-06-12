@@ -27,48 +27,6 @@ Dalam MongoDB kita tidak perlu membuat basis data dengan cara *create* atau sema
 
 ```php
 <?php
-    include "koneksi.php" //sesuaikan directorymu
-    // ... lanjutan kode program.
-?>
-```
-
-## CREATE
-
-Dalam MongoDB, membuat koleksi dapat dilakukan dengan menggunakan sintaks:
-
-```mongosh
-db.createCollection("namaKoleksi")
-```
-
-Akan tetapi, karena di sini menggunakan PHP, jadi akan ada beberapa improvisasi yang dilakukan seperti membuat beberapa variable, salah satunya dengan menghubungkannya ke satu berkas PHP dengan ```include```. Jadi, kami bisa mempermudahnya menjadi:
-
-```php
-$collection = $database->createCollection("namaKoleksi");
-```
-
-Berikut adalah salah satu sintaks yang digunakan dalam Sinur Jaya Travel:
-
-```php
-$collectionName = "users";
-$collectionNames = $database->listCollectionNames();
-$collectionExist = in_array($collectionName, iterator_to_array($collectionNames));
-$collection = null;
-
-if ($collectionExist) {
-    $collection = $database->selectCollection($collectionName);
-} else {
-    $collection = $database->createCollection($collectionName);
-}
-```
-
-Sintaks di atas terdapat di dalam berkas bernama register.php. Sederhananya, algoritma dari program ini adalah ketika koleksi tidak ada maka dia akan membuat koleksi tersebut dan ketika koleksi ada maka koleksi akan di-*select*.
-
-## INSERT
-
-Ada beberapa kode atau sintaks *insert* dalam Sinur Jaya Travel, dan masing-masing memiliki algoritma yang berbeda, tapi yang menjadi favorit saya adalah yang terdapat di dalam buytiket.php.
-
-```php
-<?php
     include "../php/connect.php";
 
     $collectionName = "tiket";
@@ -172,11 +130,40 @@ Ada beberapa kode atau sintaks *insert* dalam Sinur Jaya Travel, dan masing-masi
         $price *= 4;
     }
 
+    $supirId = null;
+    $supirNama = null;
+    $supirEmail = null;
+    $supirNumber = null;
+
+    $supirCollection = $database->selectCollection("supir");
+
+    $pipeline = [
+        ['$sample' => ['size' => 1]]
+    ];
+
+    $options = [];
+
+    $cursor = $supirCollection->aggregate($pipeline, $options);
+    $randomSupirDocument = $cursor->toArray();
+
+    if (!empty($randomSupirDocument)) {
+        $supirId = $randomSupirDocument[0]->id;
+        $supirNama = $randomSupirDocument[0]->name;
+        $supirEmail = $randomSupirDocument[0]->email;
+        $supirNumber = $randomSupirDocument[0]->number;
+    } else {
+        echo "Tidak ada supir yang aktif.";
+    }
+
     $id = generateTiketId();
 
     $query = [
         "id" => $id,
         "busid" => $busid,
+        "supirid" => $supirId,
+        "supirname" => $supirNama,
+        "supiremail" => $supirEmail,
+        "supirnumber" => $supirNumber,
         "userid" => $userid,
         "destination" => $destination,
         "date" => $date,

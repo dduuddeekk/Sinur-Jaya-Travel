@@ -24,6 +24,7 @@
             } else {
                 header("Location: ../php/userindex.php?username=$username");
                 exit();
+                // echo "Berhasil.";
             }
         } else {
             echo "Invalid username or password.";

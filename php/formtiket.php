@@ -1,7 +1,7 @@
 <?php
     include "../php/connect.php";
-    $collection = $database->selectCollection("bus");
-    $id = isset($_GET["busid"]) ? $_GET["busid"] : "";
+    $busid = isset($_GET["busid"]) ? $_GET["busid"] : "";
+    $userid = isset($_GET["userid"]) ? $_GET["userid"] : "";
 ?>
 
 <!DOCTYPE html>
@@ -16,9 +16,8 @@
     <div class="ticketform">
         <h1>PEMBELIAN TIKET</h1>
         <form action="../php/buytiket.php" method="POST">
-            <input type="hidden" name="busid" value="<?= htmlspecialchars($id) ?>">
-            <label for="userid">Masukkan User ID:</label>
-            <input type="text" name="userid"/>
+            <input type="hidden" name="busid" value="<?= htmlspecialchars($busid) ?>">
+            <input type="hidden" name="userid" value="<?= htmlspecialchars($userid) ?>">
             <label for="destination">Tujuan:</label>
             <select name="destination">
                 <?php
