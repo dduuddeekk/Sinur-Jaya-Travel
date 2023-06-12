@@ -1,5 +1,11 @@
 <?php
     include "../php/connect.php";
+    $username = $_GET["username"];
+
+    $userCollection = $database->selectCollection("users");
+    $userDocument = $userCollection->findOne(["username" => $username]);
+    $userid = $userDocument["id"];
+
     $collection = $database->selectCollection("bus");
     $documents = $collection->find();
 ?>
@@ -89,7 +95,7 @@
                     <span>Plat: <?php echo $document["plat"]; ?></span><br>
                     <span>Jenis: <?php echo $document["type"]; ?></span><br>
                     <span>Kursi: <?php echo $document["chair"]; ?></span><br>
-                    <form action="../php/formtiket.php?busid=<?php echo $busid; ?>" method="POST">
+                    <form action="../php/formtiket.php?busid=<?php echo $busid; ?>&userid=<?php echo $userid; ?>" method="POST">
                         <button type="submit">Beli</button>
                     </form>
                 </li>
