@@ -16,6 +16,7 @@
     $image = $_FILES["image"];
     $name = isset($_POST["name"]) ? $_POST["name"] : "";
     $age = isset($_POST["age"]) ? intval($_POST["age"]) : 0; 
+    $sex = isset($_POST["sex"]) ? intval($_POST["sex"]) : "";
     $address = isset($_POST["address"]) ? $_POST["address"] : "";
     $email = isset($_POST["email"]) ? $_POST["email"] : "";
     $number = isset($_POST["number"]) ? $_POST["number"] : ""; 
@@ -25,6 +26,7 @@
         "id" => $id,
         "name" => $name,
         "age" => $age,
+        "sex" => $sex,
         "address" => $address,
         "email" => $email,
         "number" => $number,
