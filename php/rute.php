@@ -47,7 +47,8 @@
                     <script src="../javascript/linker.js"></script>
                     <script src="../javascript/buser.js"></script>
 
-                    <li><a href="../php/rute.php">rute</a></li>
+                    <li><a id ="userRoute" href="../php/rute.php">rute</a></li>
+                    <script src="../javascript/routers.js"></script>
 
                     <li><a id="userTikets" href="../php/tiket.php">tiket</a></li>
                     <script src="../javascript/tiketers.js"></script>

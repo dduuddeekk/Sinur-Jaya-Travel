@@ -1,7 +1,7 @@
 var url = window.location.href;
-var username = getParameterValue(url, "username");
+var username = getParameterValue(url, "id");
 var userLink = document.getElementById("userTikets");
-userLink.href += "?username=" + username;
+userLink.href += "?id=" + username;
 function getParameterValue(url, parameterName) {
     var paramIndex = url.indexOf(parameterName + "=");
     if (paramIndex === -1) return "";

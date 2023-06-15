@@ -17,12 +17,14 @@
 
         $result = $collection->findOne($query);
 
+        $id = $result["id"];
+
         if ($result) {
             if ($username === "admin" && $hash === "240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9") {
                 header("Location: ../html/adminindex.html");
                 exit();
             } else {
-                header("Location: ../php/userindex.php?username=$username");
+                header("Location: ../php/userindex.php?id=$id");
                 exit();
                 // echo "Berhasil.";
             }

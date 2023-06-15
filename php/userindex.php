@@ -1,9 +1,9 @@
 <?php
     include "../php/connect.php";
-    $username = $_GET["username"];
+    $id = $_GET["id"];
 
     $userCollection = $database->selectCollection("users");
-    $userDocument = $userCollection->findOne(["username" => $username]);
+    $userDocument = $userCollection->findOne(["id" => $id]);
     $userid = $userDocument["id"];
 
     $collection = $database->selectCollection("bus");
@@ -45,10 +45,9 @@
             color: aliceblue;
         }
 
-        .buslist li .bus-image {
+        .buslist li .gambarbusanjay {
             width: 200px;
             height: 150px;
-            object-fit: cover;
             margin-bottom: 10px;
         }
     </style>
@@ -77,7 +76,8 @@
                     <script src="../javascript/linker.js"></script>
                     <script src="../javascript/buser.js"></script>
 
-                    <li><a href="../php/rute.php">rute</a></li>
+                    <li><a id ="userRoute" href="../php/rute.php">rute</a></li>
+                    <script src="../javascript/routers.js"></script>
 
                     <li><a id="userTikets" href="../php/tiket.php">tiket</a></li>
                     <script src="../javascript/tiketers.js"></script>
@@ -89,7 +89,7 @@
         <ul class="buslist">
             <?php foreach ($documents as $document): ?>
                 <li>
-                    <img class="bus-image" src="<?php echo $document['image']; ?>" alt="Bus Image">
+                    <img src="<?php echo $document["image"]; ?>" class="gambarbusanjay" alt="...">
                     <span>ID: <?php echo $document["id"]; ?></span><br>
                     <?php $busid = $document["id"]; ?>
                     <span>Plat: <?php echo $document["plat"]; ?></span><br>

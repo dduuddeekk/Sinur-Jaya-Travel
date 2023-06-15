@@ -5,11 +5,11 @@
 
     $userDocument = null;
 
-    if (isset($_GET["username"])) {
-        $username = $_GET["username"];
+    if (isset($_GET["id"])) {
+        $id = $_GET["id"];
 
         $query = [
-            "username" => $username
+            "id" => $id
         ];
 
         $userDocument = $userCollection->findOne($query);
@@ -52,7 +52,8 @@
                     <script src="../javascript/linker.js"></script>
                     <script src="../javascript/buser.js"></script>
 
-                    <li><a href="../php/rute.php">rute</a></li>
+                    <li><a id ="userRoute" href="../php/rute.php">rute</a></li>
+                    <script src="../javascript/routers.js"></script>
 
                     <li><a id="userTikets" href="../php/tiket.php">tiket</a></li>
                     <script src="../javascript/tiketers.js"></script>

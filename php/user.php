@@ -4,11 +4,11 @@
 
     $document = null;
 
-    if (isset($_GET["username"])) {
-        $username = $_GET["username"];
+    if (isset($_GET["id"])) {
+        $id = $_GET["id"];
 
         $query = [
-            "username" => $username
+            "id" => $id
         ];
 
         $document = $collection->findOne($query);

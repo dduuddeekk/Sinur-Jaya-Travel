@@ -38,10 +38,9 @@
             color: aliceblue;
         }
 
-        .buslist li .bus-image {
+        .buslist li .gambarbusanjay {
             width: 200px;
             height: 150px;
-            object-fit: cover;
             margin-bottom: 10px;
         }
     </style>
@@ -75,7 +74,7 @@
         <ul class="buslist">
             <?php foreach ($documents as $document): ?>
                 <li>
-                    <img class="bus-image" src="<?php echo $document['image']; ?>" alt="Bus Image">
+                    <img src="<?php echo $document["image"]; ?>" class="gambarbusanjay" alt="...">
                     <span>ID: <?php echo $document["id"]; ?></span><br>
                     <span>Plat: <?php echo $document["plat"]; ?></span><br>
                     <span>Jenis: <?php echo $document["type"]; ?></span><br>

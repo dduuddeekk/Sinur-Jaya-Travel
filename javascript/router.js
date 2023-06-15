@@ -1,6 +1,6 @@
 var url = window.location.href;
 var username = getParameterValue(url, "id");
-var userLink = document.getElementById("userLink");
+var userLink = document.getElementById("userRoute");
 userLink.href += "?id=" + username;
 function getParameterValue(url, parameterName) {
     var paramIndex = url.indexOf(parameterName + "=");
