@@ -21,7 +21,7 @@
     $number = $_POST["number"];
     $username = $_POST["username"];
     $password = $_POST["password"];
-    $status = "active";
+    // $status = "active";
 
     $hash = hash("sha256", $password);
 
@@ -32,8 +32,7 @@
         "email" => $email,
         "number" => $number,
         "username" => $username,
-        "password" => $hash,
-        "status" => $status
+        "password" => $hash
     ];
 
     $result = $collection->insertOne($document);
