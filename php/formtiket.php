@@ -63,6 +63,18 @@
                     }
                 ?>
             </select>
+            <label for="supirid">Pilih Supir:</label>
+            <select name="supirid">
+                <?php
+                    include "../php/connect.php";
+                    $supirCollection = $database->selectCollection("supir");
+                    $supirDocuments = $supirCollection->find();
+
+                    foreach ($supirDocuments as $supirDocument){
+                        echo '<option value="' . $supirDocument["id"] . '">' . $supirDocument["name"] . '</option>';
+                    }
+                ?>
+            </select>
             <label for="date">Tanggal Berangkat:</label>
             <input type="date" name="date" required>
             <button type="submit">Beli Tiket</button>

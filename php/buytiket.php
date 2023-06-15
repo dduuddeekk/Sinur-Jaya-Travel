@@ -15,6 +15,7 @@
     $busid = $_POST["busid"];
     $userid = $_POST["userid"];
     $destination = $_POST["destination"];
+    $supirid = $_POST["supirid"];
     $date = $_POST["date"];
 
     $sumatra = array(
