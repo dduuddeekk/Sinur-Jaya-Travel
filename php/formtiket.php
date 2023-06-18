@@ -2,6 +2,13 @@
     include "../php/connect.php";
     $busid = isset($_GET["busid"]) ? $_GET["busid"] : "";
     $userid = isset($_GET["userid"]) ? $_GET["userid"] : "";
+
+    $busCollection = $database->selectCollection("bus");
+    $busDocument = $busCollection->findOne(["id" => $busid]);
+
+    $maksnumber = 0;
+
+    $maksnumber = $busDocument["chair"];
 ?>
 
 <!DOCTYPE html>
@@ -71,12 +78,14 @@
                     $supirDocuments = $supirCollection->find();
 
                     foreach ($supirDocuments as $supirDocument){
-                        echo '<option value="' . $supirDocument["id"] . '">' . $supirDocument["name"] . '</option>';
+                        echo '<option value="' . $supirDocument["id"] . '">' . $supirDocument["name"] . ' ' . '(' . $supirDocument["age"] . ')' . '</option>';
                     }
                 ?>
             </select>
             <label for="date">Tanggal Berangkat:</label>
             <input type="date" name="date" required>
+            <label for="makschair">Jumlah Tiket:</label>
+            <input type="number" name="makschair" min="1" max="<?= $maksnumber ?>" required>
             <button type="submit">Beli Tiket</button>
         </form>
         <a href="javascript:history.back()" class="button-cancel">BATAL</a>

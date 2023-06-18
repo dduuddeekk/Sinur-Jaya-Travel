@@ -1,22 +1,18 @@
 <?php
     include "../php/connect.php";
-
-    $collectionName = "tiket";
-    $collectionNames = $database->listCollectionNames();
-    $collectionExist = in_array($collectionName, iterator_to_array($collectionNames));
-    $collection = null;
-
-    if ($collectionExist) {
-        $collection = $database->selectCollection($collectionName);
-    } else {
-        $collection = $database->createCollection($collectionName);
-    }
-
     $busid = $_POST["busid"];
     $userid = $_POST["userid"];
     $destination = $_POST["destination"];
     $supirid = $_POST["supirid"];
     $date = $_POST["date"];
+    $maksnumber = intval($_POST["makschair"]);
+
+    $busCollection = $database->selectCollection("bus");
+    $busDocument = $busCollection->findOne(["id" => $busid]);
+
+    $chairNumber = 0;
+
+    $chairNumber = $busDocument["chair"];
 
     $sumatra = array(
         "Aceh",
@@ -68,11 +64,6 @@
 
     $price = 0;
 
-    $busCollection = $database->selectCollection("bus");
-
-    $tempid = $busid;
-    $busDocument = $busCollection->find(["id" => $tempid]);
-
     foreach ($busDocument as $bus){
         $type = $bus['type'];
         switch($type){
@@ -103,53 +94,74 @@
         $price *= 4;
     }
 
-    $supirId = null;
-    $supirNama = null;
-    $supirEmail = null;
-    $supirNumber = null;
+    $collection = $database->selectCollection("tiket");
+    $searchSupirDocument = $collection->find(["supirid" => $supirid]);
 
-    $supirCollection = $database->selectCollection("supir");
-
-    $pipeline = [
-        ['$sample' => ['size' => 1]]
-    ];
-
-    $options = [];
-
-    $cursor = $supirCollection->aggregate($pipeline, $options);
-    $randomSupirDocument = $cursor->toArray();
-
-    if (!empty($randomSupirDocument)) {
-        $supirId = $randomSupirDocument[0]->id;
-        $supirNama = $randomSupirDocument[0]->name;
-        $supirEmail = $randomSupirDocument[0]->email;
-        $supirNumber = $randomSupirDocument[0]->number;
-    } else {
-        echo "Tidak ada supir yang aktif.";
-    }
-
-    $id = generateTiketId();
-
-    $query = [
-        "id" => $id,
-        "busid" => $busid,
-        "supirid" => $supirId,
-        "supirname" => $supirNama,
-        "supiremail" => $supirEmail,
-        "supirnumber" => $supirNumber,
-        "userid" => $userid,
-        "destination" => $destination,
-        "date" => $date,
-        "price" => $price
-    ];
-
-    $document = $collection->insertOne($query);
-
-    if($document){
-        header("Location: ../php/tiketsuccess.php?id=$userid");
+    if($supirid == $searchSupirDocument["supirid"] && $busid != $searchSupirDocument["busid"] && $date != $searchSupirDocument["date"]){
+        header("Location: ../php/errormessagetiket.php?busid=$busid&userid=$userid");
+        exit();
+    }else if($supirid == $searchSupirDocument["supirid"] && $busid == $searchSupirDocument["busid"] && $date != $searchSupirDocument["date"]){
+        header("Location: ../php/errormessagetiket.php?busid=$busid&userid=$userid");
         exit();
     }else{
-        echo "Something went wrong.";
+        $result = null;
+        $resultBus = null;
+        $temp = 1;
+        while ($temp <= $maksnumber) {
+            $supirCollection = $database->selectCollection("supir");
+            $supirDocument = $supirCollection->findOne(["id" => $supirid]);
+
+            $id = generateTiketId();
+
+            $tiketQuery = [
+                "id" => $id,
+                "busid" => $busid,
+                "supirid" => $supirid,
+                "supirname" => $supirDocument["name"],
+                "supiremail" => $supirDocument["email"],
+                "supirnumber" => $supirDocument["number"],
+                "userid" => $userid,
+                "chairnumber" => $chairNumber,
+                "destination" => $destination,
+                "date" => $date,
+                "price" => $price
+            ];
+
+            // Mengupdate Bus Ketika Pembelian Tiket.
+            $getBusPlat = $busDocument["plat"];
+            $getBusType = $busDocument["type"];
+            $getBusStatus = $busDocument["status"];
+            $getBusImage = $busDocument["image"];
+        
+            $filterBus = ["id" => $busid];
+            $queryBus = [
+                '$set' => [
+                    "plat" => $getBusPlat,
+                    "type" => $getBusType,
+                    "chair" => $chairNumber - 1,
+                    "status" => $getBusStatus,
+                    "image" => $getBusImage
+                ]
+            ];
+        
+            $resultBus = $busCollection->updateOne($filterBus, $queryBus);
+            $result = $collection->insertOne($tiketQuery);
+
+            $temp += 1;
+        }
+
+        if($result != null){
+            if($resultBus != null){
+                header("Location: ../php/tiketsuccess.php?id=$userid");
+                exit();
+            }else{
+                header("Location: ../php/errormessagetiket.php?busid=$busid&userid=$userid");
+                exit();
+            }
+        }else{
+            header("Location: ../php/errormessagetiket.php?busid=$busid&userid=$userid");
+            exit();
+        }
     }
 
     function generateTiketId() {

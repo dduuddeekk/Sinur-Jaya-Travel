@@ -69,13 +69,13 @@
                     <li><a id="userMain" href="../php/userindex.php">beranda</a></li>
                     <li><a id="userLink" href="../php/user.php">akun</a></li>
                     <li><a id="userBus" href="../php/bus.php">bus</a></li>
+                    <li><a id ="userRoute" href="../php/rute.php">rute</a></li>
                     
                     <script src="../javascript/mainer.js"></script>
                     <script src="../javascript/linker.js"></script>
                     <script src="../javascript/buser.js"></script>
+                    <script src="../javascript/router.js"></script>
 
-                    <li><a id ="userRoute" href="../php/rute.php">rute</a></li>
-                    <script src="../javascript/routers.js"></script>
 
                     <li><a id="userTikets" href="../php/tiket.php">tiket</a></li>
                     <script src="../javascript/tiketers.js"></script>

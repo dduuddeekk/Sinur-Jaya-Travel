@@ -41,12 +41,14 @@ label {
 }
 
 input[type="text"],
+input[type="number"],
 input[type="date"],
 select {
     margin-bottom: 10px;
     padding: 8px;
     border: 1px solid #fcd733;
     border-radius: 4px;
+    font-family: inherit;
 }
 
 button[type="submit"] {
