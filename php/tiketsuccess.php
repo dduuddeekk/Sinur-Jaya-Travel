@@ -1,14 +1,15 @@
 <?php
 include "../php/connect.php";
-$collection = $database->selectCollection("users");
-
 $id = $_GET["id"];
-$document = $collection->findOne(["id" => $id]);
+// $collection = $database->selectCollection("users");
 
-if (!$document) {
-    echo "Dokumen tidak ditemukan.";
-    exit;
-}
+// $id = $_GET["id"];
+// $document = $collection->findOne(["id" => $id]);
+
+// if (!$document) {
+//     echo "Dokumen tidak ditemukan.";
+//     exit;
+// }
 ?>
 
 <!DOCTYPE html>
@@ -67,6 +68,6 @@ if (!$document) {
     <div>
         <img src="../image/benar.jpg" alt="Success Image">
     </div>
-    <a href="../php/userindex.php?username=<?php echo urlencode($document["username"]); ?>" class="button">Kembali</a>
+    <a href="../php/userindex.php?id=<?php echo $id; ?>" class="button">Kembali</a>
 </body>
 </html>

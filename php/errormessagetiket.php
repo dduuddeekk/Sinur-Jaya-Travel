@@ -26,7 +26,11 @@
             margin-bottom: 20px;
         }
         
-        a.button {
+        p {
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        .button {
             color: #fcd733;
             font-family: 'Roboto', sans-serif;
             text-decoration: none;
@@ -38,28 +42,25 @@
             transition: background-color 0.3s ease;
         }
         
-        a.button:hover {
+        .button:hover {
             background-color: #fcd733;
             color: aliceblue;
         }
         
-        a.button:focus {
+        .button:focus {
             outline: none;
         }
     </style>
 </head>
 <body>
     <?php
-        include "../php/connect.php";
         $busid = $_GET["busid"];
         $userid = $_GET["userid"];
     ?>
     <h1>PEMBELIAN GAGAL</h1>
-    <img src="../image/sedih.png">
+    <img src="../image/sedih.png" alt="Sedih">
     <h2>Terjadi Sebuah Kesalahan!</h2>
     <p>Supir sedang sibuk atau bus sedang sibuk.</p>
-    <form action="../php/formtiket.php?busid=<?php echo $busid; ?>&userid=<?php echo $userid ?>">
-        <button class="button">KEMBALI</button>
-    </form>
+    <a href="../php/formtiket.php?busid=<?php echo $busid; ?>&userid=<?php echo $userid; ?>" class="button">KEMBALI</a>
 </body>
 </html>

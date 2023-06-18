@@ -10,8 +10,6 @@
     $busCollection = $database->selectCollection("bus");
     $busDocument = $busCollection->findOne(["id" => $busid]);
 
-    $chairNumber = 0;
-
     $chairNumber = $busDocument["chair"];
 
     $sumatra = array(
@@ -64,22 +62,20 @@
 
     $price = 0;
 
-    foreach ($busDocument as $bus){
-        $type = $bus['type'];
-        switch($type){
-            case 'BIG':
-                $price = 200000;
-                break;
-            case 'MEDIUM':
-                $price = 100000;
-                break;
-            case 'MICRO':
-                $price = 50000;
-                break;
-            default:
-                $price = 0;
-                break;
-        }
+    $type = $busDocument["type"];
+    switch($type){
+        case 'BIG':
+            $price = 200000;
+            break;
+        case 'MEDIUM':
+            $price = 100000;
+            break;
+        case 'MICRO':
+            $price = 50000;
+            break;
+        default:
+            $price = 0;
+            break;
     }
 
     if(in_array($destination, $jawa) || in_array($destination, $nusaTenggara)){
@@ -97,13 +93,21 @@
     $collection = $database->selectCollection("tiket");
     $searchSupirDocument = $collection->find(["supirid" => $supirid]);
 
-    if($supirid == $searchSupirDocument["supirid"] && $busid != $searchSupirDocument["busid"] && $date != $searchSupirDocument["date"]){
+    $foundSupir = false;
+    foreach ($searchSupirDocument as $doc) {
+        if ($doc["supirid"] == $supirid && $doc["busid"] != $busid && $doc["date"] != $date) {
+            $foundSupir = true;
+            break;
+        } else if ($doc["supirid"] == $supirid && $doc["busid"] == $busid && $doc["date"] != $date) {
+            $foundSupir = true;
+            break;
+        }
+    }
+
+    if ($foundSupir) {
         header("Location: ../php/errormessagetiket.php?busid=$busid&userid=$userid");
         exit();
-    }else if($supirid == $searchSupirDocument["supirid"] && $busid == $searchSupirDocument["busid"] && $date != $searchSupirDocument["date"]){
-        header("Location: ../php/errormessagetiket.php?busid=$busid&userid=$userid");
-        exit();
-    }else{
+    } else {
         $result = null;
         $resultBus = null;
         $temp = 1;
