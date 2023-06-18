@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 //     $queryOptions['sort'] = $sortOptions;
 // }
 
-// $documents = $collection->find([], $queryOptions);
+$documents = $collection->find();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -80,7 +80,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <?php endif; ?>
                     <span>ID: <?php echo $document["id"]; ?></span>
                     <span>Nama: <?php echo $document["name"]; ?></span>
-                    <span>Umur: <?php echo $document["age"]; ?></span>
                     <span>Alamat: <?php echo $document["address"]; ?></span>
                     <span>Email: <?php echo $document["email"]; ?></span>
                     <span>Telepon: <?php echo $document["number"]; ?></span>
