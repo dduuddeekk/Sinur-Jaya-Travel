@@ -10,6 +10,7 @@
     list-style: none;
     padding: 0;
     margin: 0;
+    font-family: "Roboto", sans-serif;
 }
 
 .tiketlist li {
@@ -20,6 +21,7 @@
     padding: 10px;
     background-color: #fcd733;
     color: aliceblue;
+    font-family: "Roboto", sans-serif;
 }
 
 .tiketlist li .tiket-image {

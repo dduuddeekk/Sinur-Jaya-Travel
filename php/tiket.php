@@ -1,25 +1,44 @@
 <?php
-    include "../php/connect.php";
+include "../php/connect.php";
 
-    $userCollection = $database->selectCollection("users");
+$userCollection = $database->selectCollection("users");
 
-    $userDocument = null;
+$userDocument = null;
 
-    if (isset($_GET["id"])) {
-        $id = $_GET["id"];
+if (isset($_GET["id"])) {
+    $id = $_GET["id"];
 
-        $query = [
-            "id" => $id
-        ];
+    $query = [
+        "id" => $id
+    ];
 
-        $userDocument = $userCollection->findOne($query);
-    }
+    $userDocument = $userCollection->findOne($query);
+}
 
-    $userid = $userDocument["id"];
+$userid = $userDocument["id"];
 
-    $collection = $database->selectCollection("tiket");
-    $documents = $collection->find(["userid" => $userid]);
+$collection = $database->selectCollection("tiket");
+
+$searchQuery = [];
+
+if (isset($_GET["search"])) {
+    $search = $_GET["search"];
+
+    $searchQuery = [
+        '$or' => [
+            ["id" => $search],
+            ["busid" => $search],
+            ["supirname" => $search],
+            ["destination" => $search],
+            ["date" => $search],
+            ["price" => $search]
+        ]
+    ];
+}
+
+$documents = $collection->find(array_merge(["userid" => $userid], $searchQuery));
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,6 +50,34 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Tiket User</title>
+    <style>
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .search-bar input[type="text"] {
+            border: 2px solid #fcd733;
+            border-radius: 5px;
+            padding: 8px 10px;
+            width: 300px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .search-bar button {
+            background-color: #fcd733;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 15px;
+            margin-left: 10px;
+            font-family: 'Roboto', sans-serif;
+            color: #fff;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -55,12 +102,19 @@
                     <script src="../javascript/router.js"></script>
 
 
-                    <li><a id="userTikets" href="../php/tiket.php">tiket</a></li>
+                    <li><a id="userTikets" href="../php/tiket.php?id=<?php echo $userDocument['id']; ?>&search=Yogyakarta">tiket</a></li>
                     <script src="../javascript/tiketers.js"></script>
                 </ul>
             </nav>
         </div>
         <div class="tiketnya">
+            <form method="GET" action="../php/tiket.php">
+                <input type="hidden" name="id" value="<?php echo $userDocument['id']; ?>">
+                <div class="search-bar">
+                    <input type="text" name="search" placeholder="Cari tiket...">
+                    <button type="submit"><i class="fas fa-search"></i></button>
+                </div>
+            </form>
             <ul class="tiketlist">
                 <?php foreach ($documents as $document): ?>
                     <li>
