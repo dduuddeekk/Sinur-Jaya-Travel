@@ -90,6 +90,27 @@ if ($destination) {
             color: #fff;
             cursor: pointer;
         }
+
+        .filters{
+            font-family: "Roboto", sans-serif;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        .filters select{
+            border: 1px solid #fcd733;
+            padding: 7px 10px;
+            font-size: 20px;
+        }
+
+        .filters button{
+            background-color: #fcd733;
+            border: 1px solid #fcd733;
+            color: aliceblue;
+            font-size: 20px;
+            padding: 7px 10px;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
@@ -126,7 +147,7 @@ if ($destination) {
                 </div>
             </form>
             <br>
-            <form action="../php/tiket.php?userid=<?php echo isset($userid) ? $userid : ''; ?>&" method="GET">
+            <form action="../php/tiket.php?userid=<?php echo isset($userid) ? $userid : ''; ?>&" method="GET" class="filters">
                 <label for="destination">Cari Daerah:</label>
                 <select name="destination">
                     <?php
