@@ -27,14 +27,31 @@ if (!empty($sortOptions)) {
     $queryOptions['sort'] = $sortOptions;
 }
 
-$documents = $collection->find([], $queryOptions);
+$searchKeyword = isset($_GET["search"]) ? $_GET["search"] : "";
+$filter = [];
+
+if (!empty($searchKeyword)) {
+    $filter = ['$or' => [
+        ["id" => ['$regex' => $searchKeyword, '$options' => 'i']],
+        ["name" => ['$regex' => $searchKeyword, '$options' => 'i']],
+        ["age" => ['$regex' => $searchKeyword, '$options' => 'i']],
+        ["address" => ['$regex' => $searchKeyword, '$options' => 'i']],
+        ["email" => ['$regex' => $searchKeyword, '$options' => 'i']],
+        ["number" => ['$regex' => $searchKeyword, '$options' => 'i']],
+        ["status" => ['$regex' => $searchKeyword, '$options' => 'i']]
+    ]];
+}
+
+$documents = $collection->find($filter, $queryOptions);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../style/listbus.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <title>DAFTAR SUPIR</title>
     <style>
         .sort-button-container {
@@ -54,10 +71,44 @@ $documents = $collection->find([], $queryOptions);
         .sort-button:hover {
             background-color: #f9c611;
         }
+        .searchbar {
+            margin-bottom: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .searchbar form {
+            display: flex;
+            align-items: center;
+        }
+
+        .searchbar input[type="text"] {
+            padding: 5px;
+            width: 200px;
+            border: 1px solid #fcd733;
+            border-radius: 4px;
+            margin-right: 5px;
+        }
+
+        .searchbar button {
+            padding: 7px 10px;
+            background-color: #fcd733;
+            color: aliceblue;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
     <h1>DAFTAR SUPIR</h1>
+    <div class="searchbar">
+        <form action="../php/listsupir.php" method="GET">
+            <input type="text" name="search" placeholder="Cari supir ...." value="<?php echo $searchKeyword; ?>">
+            <button type="submit" class="fas fa-search"></button>
+        </form>
+    </div>
     <form action="../html/adminindex.html">
         <button type="submit" class="kembali-button">KEMBALI</button>
     </form>
