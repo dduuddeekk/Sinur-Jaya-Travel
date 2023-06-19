@@ -79,6 +79,15 @@ else $documents = $collection->find($filter, $queryOptions);
             font-size: 20px;
         }
 
+        .sort-button-container button{
+            background-color: #fcd733;
+            border: 1px solid #fcd733;
+            color: aliceblue;
+            font-size: 20px;
+            padding: 7px 10px;
+            border-radius: 5px;
+        }
+
         .sort-button:hover {
             background-color: #fcd733;
         }
@@ -138,13 +147,16 @@ else $documents = $collection->find($filter, $queryOptions);
         <button type="submit">TAMBAH</button>
     </form>
     <div class="sort-button-container">
+        <form action="../php/listsupir.php" method="GET">
         <label for="group">Status:</label>
         <select name="group">
             <option value="null">None</option>
             <option value="inactive">Tidak Aftif</option>
             <option value="active">Aktif</option>
         </select>
-        <br><br>
+        <button type="submit">Group</button>
+        </form>
+        <br>
         <span>Urutkan berdasarkan:</span>
         <a href="?sort=name" class="sort-button">Nama</a>
         <a href="?sort=age" class="sort-button">Umur</a>
