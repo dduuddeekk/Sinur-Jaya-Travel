@@ -15,12 +15,15 @@ if (isset($_GET["id"])) {
     $userDocument = $userCollection->findOne($query);
 }
 
-$userid = $userDocument["id"];
+$userid = null;
+
+if ($userDocument !== null) {
+    $userid = $userDocument["id"];
+}
 
 $collection = $database->selectCollection("tiket");
 
 $searchQuery = [];
-
 $search = null;
 
 if (isset($_GET["search"])) {
@@ -38,7 +41,15 @@ if (isset($_GET["search"])) {
     ];
 }
 
-$documents = $collection->find(array_merge(["userid" => $userid], $searchQuery));
+$destination = isset($_GET["destination"]) ? $_GET["destination"] : "";
+
+if ($destination) {
+    $documents = $collection->find(["destination" => $destination]);
+} elseif ($userid) {
+    $documents = $collection->find(array_merge(["userid" => $userid], $searchQuery));
+} else {
+    $documents = [];
+}
 ?>
 
 <!DOCTYPE html>
@@ -96,8 +107,8 @@ $documents = $collection->find(array_merge(["userid" => $userid], $searchQuery))
                     <li><a id="userMain" href="../php/userindex.php">beranda</a></li>
                     <li><a id="userLink" href="../php/user.php">akun</a></li>
                     <li><a id="userBus" href="../php/bus.php">bus</a></li>
-                    <li><a id ="userRoute" href="../php/rute.php">rute</a></li>
-                    <li><a id="userTikets" href="../php/tiket.php?id=<?php echo $userDocument['id']; ?>&search=<?php echo $search; ?>">tiket</a></li>
+                    <li><a id="userRoute" href="../php/rute.php">rute</a></li>
+                    <li><a id="userTikets" href="../php/tiket.php?id=<?php echo isset($userDocument['id']) ? $userDocument['id'] : ''; ?>&search=<?php echo $search; ?>">tiket</a></li>
                     <script src="../javascript/mainer.js"></script>
                     <script src="../javascript/linker.js"></script>
                     <script src="../javascript/buser.js"></script>
@@ -108,11 +119,59 @@ $documents = $collection->find(array_merge(["userid" => $userid], $searchQuery))
         </div>
         <div class="tiketnya">
             <form method="GET" action="../php/tiket.php">
-                <input type="hidden" name="id" value="<?php echo $userDocument['id']; ?>">
+                <input type="hidden" name="id" value="<?php echo isset($userDocument['id']) ? $userDocument['id'] : ''; ?>">
                 <div class="search-bar">
                     <input type="text" name="search" placeholder="Cari tiket...">
                     <button type="submit"><i class="fas fa-search"></i></button>
                 </div>
+            </form>
+            <br>
+            <form action="../php/tiket.php?userid=<?php echo isset($userid) ? $userid : ''; ?>&" method="GET">
+                <label for="destination">Cari Daerah:</label>
+                <select name="destination">
+                    <?php
+                    $provinces = array(
+                        "Aceh",
+                        "Bangka Belitung",
+                        "Banten",
+                        "Bengkulu",
+                        "Gorontalo",
+                        "DKI Jakarta",
+                        "Jambi",
+                        "Jawa Barat",
+                        "Jawa Tengah",
+                        "Jawa Timur",
+                        "Kalimantan Barat",
+                        "Kalimantan Selatan",
+                        "Kalimantan Tengah",
+                        "Kalimantan Timur",
+                        "Kalimantan Utara",
+                        "Kepulauan Riau",
+                        "Lampung",
+                        "Maluku",
+                        "Maluku Utara",
+                        "Nusa Tenggara Barat",
+                        "Nusa Tenggara Timur",
+                        "Papua",
+                        "Papua Barat",
+                        "Riau",
+                        "Sulawesi Barat",
+                        "Sulawesi Selatan",
+                        "Sulawesi Tengah",
+                        "Sulawesi Tenggara",
+                        "Sulawesi Utara",
+                        "Sumatera Barat",
+                        "Sumatera Selatan",
+                        "Sumatera Utara",
+                        "Yogyakarta"
+                    );
+
+                    foreach ($provinces as $province) {
+                        echo '<option value="' . $province . '">' . $province . '</option>';
+                    }
+                    ?>
+                </select>
+                <button type="submit">Group</button>
             </form>
             <ul class="tiketlist">
                 <?php foreach ($documents as $document): ?>

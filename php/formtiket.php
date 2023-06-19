@@ -30,7 +30,6 @@
                 <?php
                     $provinces = array(
                         "Aceh",
-                        "Bali",
                         "Bangka Belitung",
                         "Banten",
                         "Bengkulu",
