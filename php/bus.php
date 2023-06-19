@@ -1,35 +1,35 @@
 <?php
-    include "../php/connect.php";
+include "../php/connect.php";
 
-    $id = isset($_GET["id"]) ? $_GET["id"] : "";
+$id = isset($_GET["id"]) ? $_GET["id"] : "";
 
-    $userDocument = null;
-    $userid = "";
+$userDocument = null;
+$userid = "";
 
-    if (!empty($id)) {
-        $userCollection = $database->selectCollection("users");
-        $userDocument = $userCollection->findOne(["id" => $id]);
-        $userid = $userDocument ? $userDocument["id"] : "";
-    }
+if (!empty($id)) {
+    $userCollection = $database->selectCollection("users");
+    $userDocument = $userCollection->findOne(["id" => $id]);
+    $userid = $userDocument ? $userDocument["id"] : "";
+}
 
-    $collection = $database->selectCollection("bus");
-    $documents = $collection->find();
+$collection = $database->selectCollection("bus");
+$documents = $collection->find();
 
-    $searchKeyword = isset($_GET["search"]) ? $_GET["search"] : "";
-    $filteredDocuments = [];
+$searchKeyword = isset($_GET["search"]) ? $_GET["search"] : "";
+$filteredDocuments = [];
 
-    if (!empty($searchKeyword)) {
-        $filter = ['$or' => [
-            ["id" => ['$regex' => $searchKeyword, '$options' => 'i']],
-            ["plat" => ['$regex' => $searchKeyword, '$options' => 'i']],
-            ["type" => ['$regex' => $searchKeyword, '$options' => 'i']],
-            ["chair" => ['$regex' => $searchKeyword, '$options' => 'i']]
-        ]];
+if (!empty($searchKeyword)) {
+    $filter = ['$or' => [
+        ["id" => ['$regex' => $searchKeyword, '$options' => 'i']],
+        ["plat" => ['$regex' => $searchKeyword, '$options' => 'i']],
+        ["type" => ['$regex' => $searchKeyword, '$options' => 'i']],
+        ["chair" => ['$regex' => $searchKeyword, '$options' => 'i']]
+    ]];
 
-        $filteredDocuments = $collection->find($filter);
-    } else {
-        $filteredDocuments = $documents;
-    }
+    $filteredDocuments = $collection->find($filter);
+} else {
+    $filteredDocuments = $documents;
+}
 ?>
 
 <!DOCTYPE html>
@@ -47,7 +47,7 @@
         .busnya {
             background-color: aliceblue; 
             width: 100%;
-            max-width: 800px;
+            max-width: auto;
             padding: 20px;
             box-sizing: border-box;
         }
@@ -96,10 +96,11 @@
             width: 200px;
             border: 1px solid #fcd733;
             border-radius: 4px;
+            margin-right: 5px;
         }
 
         .searchbar button {
-            padding: 5px 10px;
+            padding: 7px 10px;
             background-color: #fcd733;
             color: aliceblue;
             border: none;
@@ -124,11 +125,11 @@
                     <li><a id="userLink" href="../php/user.php">akun</a></li>
                     <li><a id="userBus" href="../php/bus.php">bus</a></li>
                     <li><a id="userRoute" href="../php/rute.php">rute</a></li>
+                    <li><a id="userTikets" href="../php/tiket.php">tiket</a></li>
                     <script src="../javascript/mainer.js"></script>
                     <script src="../javascript/linker.js"></script>
                     <script src="../javascript/buser.js"></script>
                     <script src="../javascript/router.js"></script>
-                    <li><a id="userTikets" href="../php/tiket.php">tiket</a></li>
                     <script src="../javascript/tiketers.js"></script>
                 </ul>
             </nav>
@@ -136,8 +137,8 @@
         <div class="busnya">
             <div class="searchbar">
                 <form action="../php/bus.php" method="GET">
-                    <input type="text" name="search" placeholder="Cari bus" value="<?php echo $searchKeyword; ?>">
-                    <button type="submit">Cari</button>
+                    <input type="text" name="search" placeholder="Cari bus ...." value="<?php echo $searchKeyword; ?>">
+                    <button type="submit" class="fas fa-search"></button>
                 </form>
             </div>
             <ul class="buslist">

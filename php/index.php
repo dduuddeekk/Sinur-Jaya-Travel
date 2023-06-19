@@ -34,7 +34,7 @@
             align-items: center;
             margin: 10px;
             padding: 10px;
-            background-color: #fcd773;
+            background-color: #fcd733;
             color: aliceblue;
         }
 

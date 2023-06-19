@@ -21,17 +21,19 @@ $collection = $database->selectCollection("tiket");
 
 $searchQuery = [];
 
+$search = null;
+
 if (isset($_GET["search"])) {
     $search = $_GET["search"];
 
     $searchQuery = [
         '$or' => [
-            ["id" => $search],
-            ["busid" => $search],
-            ["supirname" => $search],
-            ["destination" => $search],
-            ["date" => $search],
-            ["price" => $search]
+            ["id" => ['$regex' => $search, '$options' => 'i']],
+            ["busid" => ['$regex' => $search, '$options' => 'i']],
+            ["supirname" => ['$regex' => $search, '$options' => 'i']],
+            ["destination" => ['$regex' => $search, '$options' => 'i']],
+            ["date" => ['$regex' => $search, '$options' => 'i']],
+            ["price" => ['$regex' => $search, '$options' => 'i']]
         ]
     ];
 }
@@ -95,14 +97,11 @@ $documents = $collection->find(array_merge(["userid" => $userid], $searchQuery))
                     <li><a id="userLink" href="../php/user.php">akun</a></li>
                     <li><a id="userBus" href="../php/bus.php">bus</a></li>
                     <li><a id ="userRoute" href="../php/rute.php">rute</a></li>
-                    
+                    <li><a id="userTikets" href="../php/tiket.php?id=<?php echo $userDocument['id']; ?>&search=<?php echo $search; ?>">tiket</a></li>
                     <script src="../javascript/mainer.js"></script>
                     <script src="../javascript/linker.js"></script>
                     <script src="../javascript/buser.js"></script>
                     <script src="../javascript/router.js"></script>
-
-
-                    <li><a id="userTikets" href="../php/tiket.php?id=<?php echo $userDocument['id']; ?>&search=Yogyakarta">tiket</a></li>
                     <script src="../javascript/tiketers.js"></script>
                 </ul>
             </nav>
