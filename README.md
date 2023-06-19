@@ -180,6 +180,7 @@ Dalam MongoDB kita tidak perlu membuat basis data dengan cara *create* atau sema
             $result = $collection->insertOne($tiketQuery);
 
             $temp += 1;
+            $chairNumber -= 1;
         }
 
         if($result != null){

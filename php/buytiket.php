@@ -152,6 +152,7 @@
             $result = $collection->insertOne($tiketQuery);
 
             $temp += 1;
+            $chairNumber -= 1;
         }
 
         if($result != null){

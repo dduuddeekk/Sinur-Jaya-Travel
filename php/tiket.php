@@ -122,6 +122,7 @@ $documents = $collection->find(array_merge(["userid" => $userid], $searchQuery))
                         <span>ID Bus: <?php echo $document["busid"]; ?></span><br>
                         <span>Nama Supir: <?php echo $document["supirname"]; ?></span><br>
                         <span>Kontak Supir: <?php echo $document["supiremail"] . ", " . $document["supirnumber"]; ?></span><br>
+                        <span>Nomor Kursi: <?php echo $document["chairnumber"]; ?></span><br>
                         <span>Tujuan: <?php echo $document["destination"]; ?></span><br>
                         <span>Tanggal Keberangkatan: <?php echo $document["date"]; ?></span><br>
                         <span>Total Harga: <?php echo $document["price"]; ?></span>

@@ -42,7 +42,11 @@ if (!empty($searchKeyword)) {
     ]];
 }
 
-$documents = $collection->find($filter, $queryOptions);
+$group = isset($_GET["group"]) ? $_GET["group"] : "";
+
+if($group == "inactive") $documents = $collection->find(["status" => $group]);
+else if($group == "active") $documents = $collection->find(["status" => $group]);
+else $documents = $collection->find($filter, $queryOptions);
 ?>
 
 <!DOCTYPE html>
@@ -57,6 +61,7 @@ $documents = $collection->find($filter, $queryOptions);
         .sort-button-container {
             text-align: center;
             margin-bottom: 10px;
+            font-size: 20px;
         }
 
         .sort-button {
@@ -68,9 +73,17 @@ $documents = $collection->find($filter, $queryOptions);
             cursor: pointer;
         }
 
-        .sort-button:hover {
-            background-color: #f9c611;
+        .sort-button-container select{
+            border: 1px solid #fcd733;
+            padding: 7px 10px;
+            font-size: 20px;
         }
+
+        .sort-button:hover {
+            background-color: #fcd733;
+        }
+
+
         .searchbar {
             margin-bottom: 20px;
             width: 100%;
@@ -99,6 +112,15 @@ $documents = $collection->find($filter, $queryOptions);
             border-radius: 4px;
             cursor: pointer;
         }
+
+        .tambah button{
+            background-color: #fcd733;
+            border: 1px solid #fcd733;
+            color: aliceblue;
+            font-size: 20px;
+            padding: 10px 15px;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
@@ -116,6 +138,13 @@ $documents = $collection->find($filter, $queryOptions);
         <button type="submit">TAMBAH</button>
     </form>
     <div class="sort-button-container">
+        <label for="group">Status:</label>
+        <select name="group">
+            <option value="null">None</option>
+            <option value="inactive">Tidak Aftif</option>
+            <option value="active">Aktif</option>
+        </select>
+        <br><br>
         <span>Urutkan berdasarkan:</span>
         <a href="?sort=name" class="sort-button">Nama</a>
         <a href="?sort=age" class="sort-button">Umur</a>
